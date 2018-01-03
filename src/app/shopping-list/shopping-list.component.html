@@ -1,0 +1,15 @@
+<h4>This is shopping list component</h4>
+<div class="row">
+  <div class="col-xs-10">
+    <app-shopping-edit (ingredientAdded)="onIngredientAdded($event)"></app-shopping-edit>
+    <hr>
+    <ul class="list-group">
+      <a href="#" class="list-group-item"
+          *ngFor="let ingredient of ingredients"
+          style="cursor: pointer">
+      {{ingredient.name}}  {{ingredient.amount}}
+        </a>
+    </ul>
+    <p>This List</p>
+  </div>
+</div>
