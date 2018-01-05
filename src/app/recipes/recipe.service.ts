@@ -28,6 +28,11 @@ export class RecipeService{
     return vm.recipes.slice();
   }
 
+  getRecipe(index:number){
+    let vm = this;
+    return vm.recipes[index];
+  }
+
   addIngredientToShoppingList(ingredient: Ingredient[]){
     let vm = this;
     vm.slService.addIngredients(ingredient);
