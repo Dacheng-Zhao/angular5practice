@@ -9,7 +9,8 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 export class RecipeService{
 
   recipeSelected = new EventEmitter<Recipe>();
- private recipes: Recipe[] = [
+
+  private recipes: Recipe[] = [
     new Recipe("A test recipe","This is a sample test","./assets/image/10.jpg",[
       new Ingredient("meat",1),
       new Ingredient("French Fries",7)
@@ -26,6 +27,13 @@ export class RecipeService{
   constructor(private slService: ShoppingListService){
 
   }
+
+  setRecipes(recipes: Recipe[]){
+    let vm = this;
+    vm.recipes = recipes;
+    vm.recipeChanged.next(vm.recipes.slice());
+  }
+
   getRecipes(){
     let vm = this;
     return vm.recipes.slice();
