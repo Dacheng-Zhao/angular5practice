@@ -37,4 +37,10 @@ export class RecipeDetailComponent implements OnInit {
     vm.router.navigate(['../',vm.id,'edit'], {relativeTo: vm.route})
   }
 
+  onDeleteRecipe(){
+    let vm = this;
+    vm.recipeService.deleteRecipe(vm.id);
+    vm.router.navigate(['/recipes'], {relativeTo: vm.route});
+  }
+
 }

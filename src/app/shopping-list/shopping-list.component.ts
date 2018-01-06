@@ -23,4 +23,9 @@ export class ShoppingListComponent implements OnInit {
     )
   }
 
+  onEditItem(index: number){
+    let vm = this;
+    vm.slService.startedEditing.next(index);
+  }
+
 }

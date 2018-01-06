@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
@@ -8,21 +10,61 @@ import { ShoppingListService } from '../shopping-list.service';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('amountInput') amountInputRef: ElementRef;
+export class ShoppingEditComponent implements OnInit, OnDestroy {
+  @ViewChild('f') slForm: NgForm;
+  subscription: Subscription;
+  editMode: boolean = false;
+  editedItemIndex: number;
+  editedItem: Ingredient;
 
   constructor(private slService:ShoppingListService) { }
 
   ngOnInit() {
+    let vm = this;
+    vm.subscription = vm.slService.startedEditing.subscribe(
+      (index: number)=>{
+        vm.editMode = true;
+        vm.editedItemIndex = index;
+        vm.editedItem = vm.slService.getIngredient(index);
+        vm.slForm.setValue({
+          name: vm.editedItem.name,
+          amount: vm.editedItem.amount
+        })
+      }
+    );
   }
 
-  onAddItem(){
+  onSubmitForm(form: NgForm){
     let vm = this;
-    const ingName = vm.nameInputRef.nativeElement.value;
-    const ingAmount = vm.amountInputRef.nativeElement.value;
-    const newIngredient =  new Ingredient(ingName,ingAmount);
-    vm.slService.addIngredient(newIngredient);
+    const value =  form.value;
+    const newIngredient =  new Ingredient(value.name,value.amount);
+    if(vm.editMode){
+      vm.slService.updateIngredient(vm.editedItemIndex, newIngredient);
+    }else{
+      vm.slService.addIngredient(newIngredient);
+    }
+    vm.editMode = false;
+    form.reset();
+  }
+
+  onClear(){
+    let vm = this;
+    vm.slForm.reset();
+    vm.editMode = false;
+  }
+
+  onDelete(){
+    let vm = this;
+    if(vm.editedItemIndex!==undefined){
+      vm.slService.deleteIngredient(vm.editedItemIndex);
+      vm.editedItemIndex = undefined;
+    }
+    vm.onClear();
+  }
+
+  ngOnDestroy(){
+    let vm = this;
+    vm.subscription.unsubscribe();
   }
 
 }
