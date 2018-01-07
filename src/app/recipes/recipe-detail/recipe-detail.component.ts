@@ -18,27 +18,27 @@ export class RecipeDetailComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    let vm = this;
+    const vm = this;
     vm.route.params.subscribe(
-      (params: Params)=>{
-        vm.id = +params["id"];
+      (params: Params) => {
+        vm.id = +params['id'];
         vm.recipe = vm.recipeService.getRecipe(vm.id);
       }
     )
   }
 
-  onAddToShoppingList(){
-    let vm = this;
+  onAddToShoppingList() {
+    const vm = this;
     vm.recipeService.addIngredientToShoppingList(vm.recipe.ingredients);
   }
 
-  onEditRecipe(){
-    let vm = this;
-    vm.router.navigate(['../',vm.id,'edit'], {relativeTo: vm.route})
+  onEditRecipe() {
+    const vm = this;
+    vm.router.navigate(['../', vm.id, 'edit'], {relativeTo: vm.route})
   }
 
-  onDeleteRecipe(){
-    let vm = this;
+  onDeleteRecipe() {
+    const vm = this;
     vm.recipeService.deleteRecipe(vm.id);
     vm.router.navigate(['/recipes'], {relativeTo: vm.route});
   }

@@ -4,24 +4,24 @@ import { Response } from '@angular/http';
 import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
-  selector:'app-header',
-  templateUrl:'./header.component.html'
+  selector: 'app-header',
+  templateUrl: './header.component.html'
 })
-export class HeaderComponent{
+export class HeaderComponent {
 
-  constructor(private dataStorageService: DataStorageService){
+  constructor(private dataStorageService: DataStorageService) {
 
   }
-  onSaveData(){
-    let vm = this;
+  onSaveData() {
+    const vm = this;
     vm.dataStorageService.storeRecipes().subscribe(
-      (response: Response)=>{
+      (response: Response) => {
       }
     );
   }
 
-  onFetchData(){
-    let vm = this;
+  onFetchData() {
+    const vm = this;
     vm.dataStorageService.getRecipes();
   }
 }

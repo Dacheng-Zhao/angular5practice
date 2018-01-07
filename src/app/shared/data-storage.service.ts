@@ -7,24 +7,24 @@ import { Recipe } from '../recipes/recipe.model';
 
 
 @Injectable()
-export class DataStorageService{
+export class DataStorageService {
   constructor(private http: Http,
-              private recipeService: RecipeService){
+              private recipeService: RecipeService) {
   }
 
-  storeRecipes(){
-    let vm = this;
-    return vm.http.put("https://ng-recipe-book-2dfef.firebaseio.com/recipes.json", vm.recipeService.getRecipes());
+  storeRecipes() {
+    const vm = this;
+    return vm.http.put('https://ng-recipe-book-2dfef.firebaseio.com/recipes.json', vm.recipeService.getRecipes());
   }
 
-  getRecipes(){
-    let vm = this;
-    vm.http.get("https://ng-recipe-book-2dfef.firebaseio.com/recipes.json").
+  getRecipes() {
+    const vm = this;
+    vm.http.get('https://ng-recipe-book-2dfef.firebaseio.com/recipes.json').
     map(
-      (response:Response)=>{
+      (response: Response) => {
         const recipes: Recipe[] = response.json();
-        for(let recipe of recipes){
-          if(!recipe['ingredients']){
+        for (const recipe of recipes){
+          if (!recipe['ingredients']) {
             console.log(recipe);
             recipe['ingredients'] = [];
           }
@@ -33,7 +33,7 @@ export class DataStorageService{
       }
     ).
     subscribe(
-      (recipes: Recipe[])=>{
+      (recipes: Recipe[]) => {
         vm.recipeService.setRecipes(recipes);
       }
     )

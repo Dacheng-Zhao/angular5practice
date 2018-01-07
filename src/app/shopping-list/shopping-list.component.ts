@@ -9,22 +9,22 @@ import { ShoppingListService } from './shopping-list.service';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients : Ingredient[];
+  ingredients: Ingredient[];
 
   constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
-    let vm = this;
+    const vm = this;
     vm.ingredients = vm.slService.getIngredients();
     vm.slService.ingredientsChanged.subscribe(
-      (ingredients: Ingredient[])=>{
+      (ingredients: Ingredient[]) => {
         vm.ingredients = ingredients;
       }
     )
   }
 
-  onEditItem(index: number){
-    let vm = this;
+  onEditItem(index: number) {
+    const vm = this;
     vm.slService.startedEditing.next(index);
   }
 

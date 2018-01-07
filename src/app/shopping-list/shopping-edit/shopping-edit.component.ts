@@ -13,16 +13,16 @@ import { ShoppingListService } from '../shopping-list.service';
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') slForm: NgForm;
   subscription: Subscription;
-  editMode: boolean = false;
+  editMode = false;
   editedItemIndex: number;
   editedItem: Ingredient;
 
-  constructor(private slService:ShoppingListService) { }
+  constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
-    let vm = this;
+    const vm = this;
     vm.subscription = vm.slService.startedEditing.subscribe(
-      (index: number)=>{
+      (index: number) => {
         vm.editMode = true;
         vm.editedItemIndex = index;
         vm.editedItem = vm.slService.getIngredient(index);
@@ -34,36 +34,36 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmitForm(form: NgForm){
-    let vm = this;
+  onSubmitForm(form: NgForm) {
+    const vm = this;
     const value =  form.value;
-    const newIngredient =  new Ingredient(value.name,value.amount);
-    if(vm.editMode){
+    const newIngredient =  new Ingredient(value.name, value.amount);
+    if (vm.editMode) {
       vm.slService.updateIngredient(vm.editedItemIndex, newIngredient);
-    }else{
+    }else {
       vm.slService.addIngredient(newIngredient);
     }
     vm.editMode = false;
     form.reset();
   }
 
-  onClear(){
-    let vm = this;
+  onClear() {
+    const vm = this;
     vm.slForm.reset();
     vm.editMode = false;
   }
 
-  onDelete(){
-    let vm = this;
-    if(vm.editedItemIndex!==undefined){
+  onDelete() {
+    const vm = this;
+    if (vm.editedItemIndex !== undefined) {
       vm.slService.deleteIngredient(vm.editedItemIndex);
       vm.editedItemIndex = undefined;
     }
     vm.onClear();
   }
 
-  ngOnDestroy(){
-    let vm = this;
+  ngOnDestroy() {
+    const vm = this;
     vm.subscription.unsubscribe();
   }
 
