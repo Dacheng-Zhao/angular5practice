@@ -1,4 +1,3 @@
-import { AuthService } from 'app/auth/auth.service';
 import { AuthService } from './../auth/auth.service';
 import { Component } from '@angular/core';
 import { Response } from '@angular/http';

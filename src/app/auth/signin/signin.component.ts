@@ -1,4 +1,3 @@
-import { AuthService } from 'app/auth/auth.service';
 import { AuthService } from './../auth.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
