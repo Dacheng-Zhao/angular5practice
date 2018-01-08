@@ -30,6 +30,11 @@ export class RecipeEditComponent implements OnInit {
     )
   }
 
+  getIngredients() {
+    const vm = this;
+    return vm.recipeForm.get('ingredients').value;
+  }
+
   private initForm() {
     const vm = this;
     let recipeName = '';

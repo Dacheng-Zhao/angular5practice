@@ -1,4 +1,4 @@
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './core/home/home.component';
 import { AuthGuard } from './auth/auth-guard.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { NgModule } from '@angular/core';
