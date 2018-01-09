@@ -18,6 +18,7 @@ export class HeaderComponent {
     const vm = this;
     vm.dataStorageService.storeRecipes().subscribe(
       (response: Response) => {
+        console.log(response);
       }
     );
   }
