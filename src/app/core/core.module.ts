@@ -1,7 +1,6 @@
 import { AuthInterceptor } from './../shared/auth.interceptor';
 import { AuthService } from './../auth/auth.service';
 import { RecipeService } from './../recipes/recipe.service';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './../app-routing.module';
 import { SharedModule } from './../shared/shared.module';
@@ -28,7 +27,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
         HeaderComponent
     ],
     providers: [
-        ShoppingListService,
         RecipeService,
         DataStorageService,
         AuthService,

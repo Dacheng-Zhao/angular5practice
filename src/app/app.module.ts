@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducers } from 'app/shopping-list/store/shopping-list.reducers';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
     ShoppingListModule,
     AuthModule,
     RecipesModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducers})
   ],
   bootstrap: [AppComponent]
 })
