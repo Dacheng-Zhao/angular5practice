@@ -13,6 +13,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { shoppingListReducers } from 'app/shopping-list/store/shopping-list.reducers';
+import { authReducer } from 'app/auth/store/auth.reducers';
+import { reducers } from './app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from 'app/auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,8 @@ import { shoppingListReducers } from 'app/shopping-list/store/shopping-list.redu
     AuthModule,
     RecipesModule,
     CoreModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducers})
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   bootstrap: [AppComponent]
 })
